@@ -1,7 +1,5 @@
 // Enclosure and Decorator Pattern Implementations
 
-const { AggressiveEncounter, PeacefulEncounter } = require('./text-game-strategy');
-
 // --- TRANSPARENT ENCLOSURE ---
 // Wraps a character and adds encounter logging around it.
 // It does NOT touch the character's strategy or alter what encounter() returns.
