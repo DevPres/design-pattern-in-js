@@ -1,16 +1,23 @@
-// Main game file demonstrating both patterns
 
 const { Troll, Dwarf } = require('./text-game-character');
 const { AggressiveEncounter, PeacefulEncounter } = require('./text-game-strategy');
 const { EncounterLogEnclosure } = require('./text-game-enclosure');
+const { ScenarioInitial } = require('./scene-initial');
+const { Scene } = require('./scene');
+
 
 class TextGame {
     constructor() {
         this.troll = new Troll("Grimm the Troll");
         this.dwarf = new Dwarf("Bronn the Dwarf");
+        this.scene = new Scene(this)
+        this.scene.setScenario(new ScenarioInitial());
     }
 
-    // Strategy pattern: each character uses its own strategy
+    runScene() {
+        this.scene.run()
+    }
+
     showNormalEncounters() {
         console.log("=== NORMAL ENCOUNTERS (Strategy Pattern) ===");
         console.log(this.troll.encounter()); // Aggressive by default
@@ -18,20 +25,15 @@ class TextGame {
         console.log("");
     }
 
-    // Transparent Enclosure: wraps characters to add logging
-    // The character's strategy is NOT touched — behavior is identical
     showTransparentEnclosure() {
         console.log("=== TRANSPARENT ENCLOSURE (Logging) ===");
 
         const loggedTroll = new EncounterLogEnclosure(this.troll);
         const loggedDwarf = new EncounterLogEnclosure(this.dwarf);
 
-        // Call encounter through the enclosure — same result as calling directly
-        console.log(loggedTroll.encounter()); // Still aggressive — strategy untouched
-        console.log(loggedDwarf.encounter()); // Still peaceful — strategy untouched
-        console.log("");
+        console.log(loggedTroll.encounter());
+        console.log(loggedDwarf.encounter());
 
-        // The enclosure added surrounding structure (a log) without changing anything
         console.log("--- Encounter log captured by the enclosure ---");
         loggedTroll.getEncounterLog().forEach(entry =>
             console.log(`[${entry.timestamp}] ${entry.character}: "${entry.message}"`)
@@ -40,15 +42,12 @@ class TextGame {
             console.log(`[${entry.timestamp}] ${entry.character}: "${entry.message}"`)
         );
 
-        // Transparency check: name access is forwarded directly to the wrapped character
         console.log(`\nloggedTroll.name === troll.name: ${loggedTroll.name === this.troll.name}`);
         console.log("");
     }
 
 
-    // Strategy flexibility: swap strategies at runtime on a live character
     showStrategyFlexibility() {
-        console.log("=== STRATEGY FLEXIBILITY (Runtime Swap) ===");
         console.log(this.troll.encounter()); // Aggressive
 
         this.troll.setEncounterStrategy(new PeacefulEncounter());
@@ -60,11 +59,7 @@ class TextGame {
     }
 
     run() {
-        console.log("TEXT GAME: STRATEGY, TRANSPARENT ENCLOSURE & DECORATOR PATTERNS\n");
-        this.showNormalEncounters();
-        this.showTransparentEnclosure();
-        this.showStrategyFlexibility();
-        console.log("=== GAME COMPLETE ===");
+        this.runScene()
     }
 }
 

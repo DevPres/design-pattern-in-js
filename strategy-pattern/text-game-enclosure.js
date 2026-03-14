@@ -1,5 +1,3 @@
-// Enclosure and Decorator Pattern Implementations
-
 // --- TRANSPARENT ENCLOSURE ---
 // Wraps a character and adds encounter logging around it.
 // It does NOT touch the character's strategy or alter what encounter() returns.
@@ -10,11 +8,9 @@ class EncounterLogEnclosure {
         this.log = [];
     }
 
-    // Same interface as Character — delegates 100% transparently
     encounter() {
         const result = this.wrappedCharacter.encounter();
 
-        // Add surrounding structure (logging) without touching the result
         this.log.push({
             character: this.wrappedCharacter.name,
             timestamp: new Date().toISOString(),
@@ -24,7 +20,6 @@ class EncounterLogEnclosure {
         return result;
     }
 
-    // Forwards name access directly to the wrapped character
     get name() {
         return this.wrappedCharacter.name;
     }
@@ -33,7 +28,6 @@ class EncounterLogEnclosure {
         this.wrappedCharacter.name = value;
     }
 
-    // Extra capability added by the enclosure — not part of Character interface
     getEncounterLog() {
         return this.log;
     }
