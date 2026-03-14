@@ -2,7 +2,7 @@
 const { Troll, Dwarf } = require('./text-game-character');
 const { AggressiveEncounter, PeacefulEncounter } = require('./text-game-strategy');
 const { EncounterLogEnclosure } = require('./text-game-enclosure');
-const { ScenarioInitial } = require('./scene-initial');
+const { ScenarioInitial } = require('./scenarios');
 const { Scene } = require('./scene');
 
 
