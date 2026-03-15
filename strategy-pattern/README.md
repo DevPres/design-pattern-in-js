@@ -6,28 +6,28 @@ A text-based adventure game built in JavaScript that demonstrates the **Strategy
 
 ```
 index.js                  - Entry point
-text-game-main.js         - TextGame bootstrap class
+main.js         - TextGame bootstrap class
 scene.js                  - Scene (context for Scenario strategies)
 scenarios.js              - Scenario base class + 5 concrete scenarios
-text-game-strategy.js     - EncounterStrategy interface + concrete strategies
-text-game-character.js    - Character (context for Encounter strategies)
-text-game-enclosure.js    - EncounterLogEnclosure (Decorator pattern bonus)
+strategy.js     - EncounterStrategy interface + concrete strategies
+character.js    - Character (context for Encounter strategies)
+enclosure.js    - EncounterLogEnclosure (Decorator pattern bonus)
 ```
 
 ## Where the Strategy Pattern Is Used
 
 ### 1. Encounter Strategy (explicit, textbook Strategy pattern)
 
-**Files:** `text-game-strategy.js`, `text-game-character.js`
+**Files:** `strategy.js`, `character.js`
 
 This is the classic Strategy pattern applied to how characters behave during encounters.
 
 | Role | Class | Location |
 |------|-------|----------|
-| Strategy interface | `EncounterStrategy` | `text-game-strategy.js:1` |
-| Concrete strategy | `AggressiveEncounter` | `text-game-strategy.js:7` |
-| Concrete strategy | `PeacefulEncounter` | `text-game-strategy.js:13` |
-| Context | `Character` | `text-game-character.js:3` |
+| Strategy interface | `EncounterStrategy` | `strategy.js:1` |
+| Concrete strategy | `AggressiveEncounter` | `strategy.js:7` |
+| Concrete strategy | `PeacefulEncounter` | `strategy.js:13` |
+| Context | `Character` | `character.js:3` |
 
 **How it works:**
 

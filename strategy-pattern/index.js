@@ -1,4 +1,4 @@
-const { TextGame } = require('./text-game-main');
+const { TextGame } = require('./main');
 
 const game = new TextGame();
 game.run();

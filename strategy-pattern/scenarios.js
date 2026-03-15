@@ -1,5 +1,5 @@
-const { Dwarf, Troll } = require("./text-game-character.js")
-const { AggressiveEncounter } = require("./text-game-strategy.js")
+const { Dwarf, Troll } = require("./characters.js")
+const { AggressiveEncounter } = require("./strategy.js")
 
 
 function generateQuestion(question, options) {
@@ -92,6 +92,43 @@ class ScenarioOutsideCell extends Scenario {
     }
 }
 
+class ScenarioOutsideCellRelaxed extends Scenario {
+    constructor() {
+        super();
+        this.npc = new Dwarf("Jhonny the dwarf");
+    }
+    run() {
+        console.log('You slept well. You feel relaxed.')
+        console.log(this.npc.encounter())
+
+        console.log(generateQuestion('Jhonny offers to help you go outside', [
+            'accept the help',
+            'refuse rudely',
+        ]))
+        const self = this
+        process.stdin.resume();
+        process.stdin.once('data', function (key) {
+            if (key === '\u0003') {
+                process.exit();
+            }
+
+            if (key.indexOf('1') == 0) {
+                self.scene.setScenario(new ScenarioTrollEncounter());
+                self.game.runScene();
+            }
+
+            if (key.indexOf('2') == 0) {
+                self.npc.setEncounterStrategy(new AggressiveEncounter())
+                console.log("You died. You had no weapon, why refuse the help?")
+                process.exit();
+            }
+
+        });
+
+
+    }
+}
+
 class ScenarioSleep extends Scenario {
 
     run() {
@@ -109,8 +146,8 @@ class ScenarioSleep extends Scenario {
             }
 
             if (key.indexOf('1') == 0) {
-                //TODO show transparent enclosure adding an Aura to the dwarf
-                console.log("press 1");
+                self.scene.setScenario(new ScenarioOutsideCellRelaxed());
+                self.game.runScene()
             }
 
             if (key.indexOf('2') == 0) {

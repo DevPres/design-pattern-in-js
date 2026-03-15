@@ -1,4 +1,4 @@
-const { AggressiveEncounter, PeacefulEncounter } = require('./text-game-strategy');
+const { AggressiveEncounter, PeacefulEncounter } = require('./strategy');
 
 class Character {
     constructor(name, encounterStrategy) {
