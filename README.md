@@ -5,8 +5,9 @@ A collection of JavaScript design pattern examples. Each folder contains a stand
 ## Patterns
 
 ### [`strategy-pattern/`](./strategy-pattern)
+### [`transparent-encolosure/`](./transparent-encolosure)
+### [`decorator-pattern/`](./decorator-pattern)
 
-Demonstrates the **Strategy** and **Transparent Enclosure** patterns using a text-based game scenario.
 
 
 More patterns coming soon.
