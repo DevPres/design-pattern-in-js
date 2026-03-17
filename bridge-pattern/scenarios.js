@@ -84,6 +84,7 @@ class ScenarioOutsideCell extends Scenario {
 
             if (key.indexOf('2') == 0) {
                 self.npc.setBehavior(new AggressiveBehavior())
+                console.log(self.npc.executeAttack({ target: "you" }))
                 console.log("You died. You had no weapon, why refuse the help?")
                 process.exit();
             }
@@ -133,6 +134,7 @@ class ScenarioTrollEncounter extends Scenario {
     run() {
         console.log("Jhonny indicates the way to the exit. After some steps you listen strange sounds")
         console.log(this.npc.encounter());
+        console.log(this.npc.executeAttack({ target: "you" }))
         console.log("Jhonny run away. You die. Never trust an helpful dwarf/")
 
         process.exit()
@@ -144,7 +146,6 @@ class ScenarioScream extends Scenario {
 
     run() {
         console.log("You just die. Why you scream? Are you fool?")
-
         process.exit()
 
     }
